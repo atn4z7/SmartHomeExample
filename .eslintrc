@@ -6,15 +6,19 @@
     "jest": true
   },
   "rules": {
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "class-methods-use-this": 0,
     "no-console": 0,
     "indent": ["error", 2],
-    "react/jsx-curly-spacing": [2, "always"],
     "spaced-comment": ["error", "always"],
     "semi": "warn",
     "arrow-body-style": ["error", "as-needed"],
     "function-paren-newline": 0,
     "comma-dangle": ["error", "never"],
     "no-use-before-define": 0,
+    "react/jsx-curly-spacing": [2, "always"],
+    "react/prop-types": 0,
+    "import/prefer-default-export": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }

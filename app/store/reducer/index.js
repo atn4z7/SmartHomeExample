@@ -1,6 +1,6 @@
 import home from './home';
-import device from './device';
+import history from './history';
 
-const allReducers = { home, device };
+const allReducers = { home, history };
 
 export default allReducers;
