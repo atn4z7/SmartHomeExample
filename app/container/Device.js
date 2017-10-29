@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import { Button } from "react-native-elements";
 import Lock from "../component/Lock";
@@ -7,24 +7,24 @@ import NotSupported from "../component/NotSupported";
 
 class Device extends Component {
   _renderHistoryButton() {
-    const { navigation } = this.props;
+    const { device, navigation } = this.props;
     return (
       <Button
         large
         title="Door Lock"
         onPress={() =>
           navigation.navigate("History", {
-            device_name: navigation.state.params.device_name
+            device_name: device.slug
           })}
       />
     );
   }
 
   _renderLock() {
-    const { device_state } = this.props;
+    const { device, dispatch } = this.props;
     return (
       <View style={styles.container}>
-        <Lock state={device_state} />
+        <Lock name={device.slug} state={device.state} dispatch={dispatch} />
         {this._renderHistoryButton()}
       </View>
     );
@@ -34,10 +34,10 @@ class Device extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { device } = this.props;
     let view;
 
-    switch (navigation.state.params.device_type) {
+    switch (device.type) {
       case "lock":
         view = this._renderLock();
         break;
@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state, props) => ({
+  device: state.home.devices[props.navigation.state.params.device_name]
+});
 
 export default connect(mapStateToProps)(Device);

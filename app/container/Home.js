@@ -13,15 +13,12 @@ class Home extends Component {
       title={item.name}
       onPress={() =>
         this.props.navigation.navigate("Device", {
-          device_name: item.slug,
-          device_type: item.type,
-          device_state: item.state
+          device_name: item.slug
         })}
     />
   );
 
   render() {
-    console.log(this.props);
     const { navigation } = this.props;
     return (
       <View style={styles.container}>

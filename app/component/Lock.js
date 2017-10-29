@@ -1,18 +1,28 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
+import { changeDeviceState } from "../store/Actions";
+import { getTimeStamp } from "../util/common";
 
-const Lock = ({ state }) => (
-  <View style={styles.container}>
-    <Text>Lock</Text>
-    <Text>{state}</Text>
-    <Button
-      large
-      title={state == "locked" ? "unlock" : "lock"}
-      onPress={() => console.log("sdsds")}
-    />
-  </View>
-);
+const getButtonTitle = currentState =>
+  currentState === "locked" ? "unlock" : "lock";
+const getNewState = currentState =>
+  currentState === "locked" ? "unlocked" : "locked";
+
+const Lock = ({ name, state, dispatch }) => {
+  return (
+    <View style={styles.container}>
+      <Text>Lock</Text>
+      <Text>{state}</Text>
+      <Button
+        large
+        title={getButtonTitle(state)}
+        onPress={() =>
+          dispatch(changeDeviceState(name, getNewState(state), getTimeStamp()))}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
