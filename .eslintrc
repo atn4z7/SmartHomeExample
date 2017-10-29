@@ -9,7 +9,7 @@
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
     "class-methods-use-this": 0,
     "no-console": 0,
-    "indent": ["error", 2],
+    "indent": ["error", 2, { "indentSwitchCase": true }],
     "spaced-comment": ["error", "always"],
     "semi": "warn",
     "arrow-body-style": ["error", "as-needed"],
