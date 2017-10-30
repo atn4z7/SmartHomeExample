@@ -21,13 +21,17 @@ const SCREEN_HEIGHT = height;
 const SCREEN_WIDTH = width;
 
 export default class Lock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      progress: new Animated.Value(0)
-    };
+  componentWillMount() {
+    if (this.props.state === 'locked') {
+      this.setState({
+        progress: new Animated.Value(0)
+      });
+    } else {
+      this.setState({
+        progress: new Animated.Value(0.5)
+      });
+    }
   }
-
   _getButtonTitle(currentState) {
     return currentState === 'locked' ? 'Unlock' : 'Lock';
   }
