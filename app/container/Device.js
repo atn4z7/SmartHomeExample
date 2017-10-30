@@ -1,11 +1,28 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
+import Animation from 'lottie-react-native';
 import Lock from '../component/Lock';
 import NotSupported from '../component/NotSupported';
 
+const animationJson = require('../animation/lock.json');
+
 class Device extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      progress: new Animated.Value(0)
+    };
+  }
+
+  componentDidMount() {
+    Animated.timing(this.state.progress, {
+      toValue: 1,
+      duration: 5000
+    }).start();
+  }
+
   _renderHistoryButton() {
     const { device, navigation } = this.props;
     return (
@@ -22,8 +39,17 @@ class Device extends Component {
 
   _renderLock() {
     const { device, dispatch } = this.props;
+
     return (
       <View style={ styles.container }>
+        <Animation
+          style={ {
+            width: 800,
+            height: 600
+          } }
+          source={ animationJson }
+          progress={ this.state.progress }
+        />
         <Lock name={ device.slug } state={ device.state } dispatch={ dispatch } />
         {this._renderHistoryButton()}
       </View>

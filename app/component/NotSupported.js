@@ -1,11 +1,33 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Animation from 'lottie-react-native';
 
-const NotSupported = () => (
-  <View style={ styles.container }>
-    <Text>Not Supported</Text>
-  </View>
-);
+const animationJson = require('../animation/empty.json');
+
+export default class NotSupported extends React.Component {
+  componentDidMount() {
+    this.animation.play();
+  }
+
+  render() {
+    return (
+      <View style={ styles.container }>
+        <Animation
+          ref={ (animation) => {
+            this.animation = animation;
+          } }
+          style={ {
+            width: 248,
+            height: 187
+          } }
+          source={ animationJson }
+          loop
+        />
+        <Text>Not Supported</Text>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -15,5 +37,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   }
 });
-
-export default NotSupported;
