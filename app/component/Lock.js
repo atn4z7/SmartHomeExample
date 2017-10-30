@@ -14,7 +14,7 @@ import {
 } from '../util/common';
 import Colors from '../config/Colors';
 
-const animationJson = require('../animation/lock.json');
+const animationJson = require('../image/animation/lock.json');
 
 const { height, width } = Dimensions.get('window');
 const SCREEN_HEIGHT = height;

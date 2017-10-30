@@ -21,7 +21,8 @@ class Device extends Component {
   }
 
   _renderNotSupported() {
-    return <NotSupported />;
+    const { device, navigation } = this.props;
+    return <NotSupported name={ device.slug } navigation={ navigation } />;
   }
 
   render() {
