@@ -8,31 +8,19 @@ const RootNavigator = StackNavigator(
   {
     Home: {
       screen: Home,
-      path: 'home',
-      navigationOptions: {
-        headerTitle: 'Home'
-      }
+      path: 'home'
     },
     Device: {
       screen: Device,
-      path: 'device/:device_name',
-      navigationOptions: ({ navigation }) => ({
-        title: navigation.state.params.device_name
-      })
+      path: 'device/:device_name'
     },
     History: {
       screen: History,
-      path: 'device/:device_name/history',
-      navigationOptions: ({ navigation }) => ({
-        title: `${navigation.state.params.device_name}'s History`
-      })
+      path: 'device/:device_name/history'
     },
     About: {
       screen: About,
-      path: 'about-us',
-      navigationOptions: {
-        headerTitle: 'About Us'
-      }
+      path: 'about-us'
     }
   },
   {
