@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 const deviceIdsSelector = state => state.deviceIds;
 const devicesSelector = state => state.devices;

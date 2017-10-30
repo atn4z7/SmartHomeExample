@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
-import { connect } from "react-redux";
-import { Button } from "react-native-elements";
-import Lock from "../component/Lock";
-import NotSupported from "../component/NotSupported";
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
+import { Button } from 'react-native-elements';
+import Lock from '../component/Lock';
+import NotSupported from '../component/NotSupported';
 
 class Device extends Component {
   _renderHistoryButton() {
@@ -12,10 +12,10 @@ class Device extends Component {
       <Button
         large
         title="Door Lock"
-        onPress={() =>
-          navigation.navigate("History", {
+        onPress={ () =>
+          navigation.navigate('History', {
             device_name: device.slug
-          })}
+          }) }
       />
     );
   }
@@ -23,8 +23,8 @@ class Device extends Component {
   _renderLock() {
     const { device, dispatch } = this.props;
     return (
-      <View style={styles.container}>
-        <Lock name={device.slug} state={device.state} dispatch={dispatch} />
+      <View style={ styles.container }>
+        <Lock name={ device.slug } state={ device.state } dispatch={ dispatch } />
         {this._renderHistoryButton()}
       </View>
     );
@@ -38,23 +38,23 @@ class Device extends Component {
     let view;
 
     switch (device.type) {
-      case "lock":
+      case 'lock':
         view = this._renderLock();
         break;
       default:
         view = this._renderNotSupported();
     }
 
-    return <View style={styles.container}>{view}</View>;
+    return <View style={ styles.container }>{view}</View>;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white"
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white'
   }
 });
 

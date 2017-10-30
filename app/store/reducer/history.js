@@ -1,9 +1,9 @@
-import { CHANGE_DEVICE_STATE } from "../Actions";
+import { CHANGE_DEVICE_STATE } from '../Actions';
 
 const initialState = {
-  "apt-143-lock": [
+  'apt-143-lock': [
     {
-      state: "locked",
+      state: 'locked',
       timestamp: 1508386138
     }
   ]
@@ -16,7 +16,7 @@ export default function history(state = initialState, action = {}) {
       if (state[action.name]) {
         // if array has 10 items already
         // then delete the earliest item (first item in this case) before pushing the new item
-        if (state[action.name].length == 10) {
+        if (state[action.name].length === 10) {
           return {
             ...state,
             [action.name]: [
