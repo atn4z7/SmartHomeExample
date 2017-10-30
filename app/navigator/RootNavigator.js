@@ -29,7 +29,7 @@ const RootNavigator = StackNavigator(
     },
     About: {
       screen: About,
-      path: 'about',
+      path: 'about-us',
       navigationOptions: {
         headerTitle: 'About Us'
       }

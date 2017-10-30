@@ -61,13 +61,13 @@ export default class Lock extends React.Component {
     );
   }
 
-  _renderToggleBtn() {
+  _renderFooter() {
     const {
       type, state, name, dispatch
     } = this.props;
 
     return (
-      <View style={ styles.about }>
+      <View style={ styles.footer }>
         <Button
           large
           containerViewStyle={ styles.buttonContainer }
@@ -117,7 +117,7 @@ export default class Lock extends React.Component {
       <View style={ styles.container }>
         {this._renderHeader()}
         {this._renderAnimation()}
-        {this._renderToggleBtn()}
+        {this._renderFooter()}
       </View>
     );
   }
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     color: Colors.btnWhite,
     fontWeight: '500'
   },
-  about: {
+  footer: {
     flex: 0.2,
     justifyContent: 'center',
     alignItems: 'center'

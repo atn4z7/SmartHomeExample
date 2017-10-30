@@ -51,8 +51,8 @@ export default class NotSupported extends React.Component {
     );
   }
 
-  _renderAbout() {
-    return <View style={ styles.about } />;
+  _renderFooter() {
+    return <View style={ styles.footer } />;
   }
 
   render() {
@@ -60,7 +60,7 @@ export default class NotSupported extends React.Component {
       <View style={ styles.container }>
         {this._renderHeader()}
         {this._renderAnimation()}
-        {this._renderAbout()}
+        {this._renderFooter()}
       </View>
     );
   }
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     color: Colors.text,
     fontWeight: '700'
   },
-  about: {
+  footer: {
     flex: 0.2,
     justifyContent: 'center',
     alignItems: 'center'

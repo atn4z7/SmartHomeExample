@@ -37,9 +37,9 @@ class Home extends Component {
     );
   }
 
-  _renderAbout() {
+  _renderFooter() {
     return (
-      <View style={ styles.about }>
+      <View style={ styles.footer }>
         <Button
           backgroundColor="white"
           textStyle={ [styles.buttonText, { color: Colors.btnDark }] }
@@ -76,7 +76,7 @@ class Home extends Component {
       <View style={ styles.container }>
         {this._renderHeader()}
         {this._renderDeviceList()}
-        {this._renderAbout()}
+        {this._renderFooter()}
       </View>
     );
   }
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     color: Colors.text,
     fontWeight: '700'
   },
-  about: {
+  footer: {
     flex: 0.2,
     justifyContent: 'center',
     alignItems: 'center'
