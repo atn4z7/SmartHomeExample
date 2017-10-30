@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 
 import { allDevicesSelector } from '../store/helper/selector';
 import Colors from '../config/Colors';
 
-import { STATUSBAR_HEIGHT } from '../util/common';
-
-const { height, width } = Dimensions.get('window');
-
-const SCREEN_WIDTH = width;
-const SCREEN_HEIGHT = height;
-const BUTTON_MARGIN = SCREEN_HEIGHT * 0.0277 / 2;
-const BUTTON_WIDTH = SCREEN_WIDTH * 0.848;
-const BUTTON_HEIGHT = SCREEN_HEIGHT * 0.096;
+import { STATUSBAR_HEIGHT, BUTTON_MARGIN, BUTTON_HEIGHT, BUTTON_WIDTH } from '../util/common';
 
 class Home extends Component {
   _keyExtractor = item => item.slug;
@@ -34,37 +26,57 @@ class Home extends Component {
     />
   );
 
+  _renderHeader() {
+    return (
+      <View style={ styles.header }>
+        <View style={ styles.navBar } />
+        <View style={ styles.title }>
+          <Text style={ styles.headerText }>{this.props.unit}</Text>
+        </View>
+      </View>
+    );
+  }
+
+  _renderAbout() {
+    return (
+      <View style={ styles.about }>
+        <Button
+          backgroundColor="white"
+          textStyle={ [styles.buttonText, { color: Colors.btnDark }] }
+          buttonStyle={ [
+            styles.button,
+            {
+              borderWidth: 2,
+              borderColor: 'rgba(0,0,0,0.5)'
+            }
+          ] }
+          large
+          title="About Us"
+          onPress={ () => this.props.navigation.navigate('About') }
+        />
+      </View>
+    );
+  }
+
+  _renderDeviceList() {
+    return (
+      <View style={ styles.deviceList }>
+        <FlatList
+          data={ this.props.devices }
+          keyExtractor={ this._keyExtractor }
+          renderItem={ this._renderItem }
+          scrollEnabled={ false }
+        />
+      </View>
+    );
+  }
+
   render() {
-    const { unit, navigation } = this.props;
     return (
       <View style={ styles.container }>
-        <View style={ styles.header }>
-          <Text style={ styles.headerText }>{unit}</Text>
-        </View>
-        <View style={ styles.deviceList }>
-          <FlatList
-            data={ this.props.devices }
-            keyExtractor={ this._keyExtractor }
-            renderItem={ this._renderItem }
-            scrollEnabled={ false }
-          />
-        </View>
-        <View style={ styles.about }>
-          <Button
-            backgroundColor="white"
-            textStyle={ [styles.buttonText, { color: Colors.btnDark }] }
-            buttonStyle={ [
-              styles.button,
-              {
-                borderWidth: 2,
-                borderColor: 'rgba(0,0,0,0.5)'
-              }
-            ] }
-            large
-            title="About Us"
-            onPress={ () => navigation.navigate('About') }
-          />
-        </View>
+        {this._renderHeader()}
+        {this._renderDeviceList()}
+        {this._renderAbout()}
       </View>
     );
   }
@@ -82,7 +94,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   deviceList: {
-    flex: 0.55
+    flex: 0.55,
+    alignItems: 'center'
   },
   headerText: {
     fontSize: 30,
@@ -107,6 +120,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.btnWhite,
     fontWeight: '500'
+  },
+  title: {
+    flex: 0.6,
+    alignItems: 'flex-start'
+  },
+  navBar: {
+    flex: 0.4,
+    flexDirection: 'row'
   }
 });
 

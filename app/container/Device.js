@@ -1,60 +1,25 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Animated } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Button } from 'react-native-elements';
-import Animation from 'lottie-react-native';
 import Lock from '../component/Lock';
 import NotSupported from '../component/NotSupported';
-
-const animationJson = require('../animation/lock.json');
+import { STATUSBAR_HEIGHT } from '../util/common';
 
 class Device extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      progress: new Animated.Value(0)
-    };
-  }
+  _renderLock() {
+    const { device, dispatch, navigation } = this.props;
 
-  componentDidMount() {
-    Animated.timing(this.state.progress, {
-      toValue: 1,
-      duration: 5000
-    }).start();
-  }
-
-  _renderHistoryButton() {
-    const { device, navigation } = this.props;
     return (
-      <Button
-        large
-        title="Door Lock"
-        onPress={ () =>
-          navigation.navigate('History', {
-            device_name: device.slug
-          }) }
+      <Lock
+        name={ device.slug }
+        type={ device.type }
+        state={ device.state }
+        dispatch={ dispatch }
+        navigation={ navigation }
       />
     );
   }
 
-  _renderLock() {
-    const { device, dispatch } = this.props;
-
-    return (
-      <View style={ styles.container }>
-        <Animation
-          style={ {
-            width: 800,
-            height: 600
-          } }
-          source={ animationJson }
-          progress={ this.state.progress }
-        />
-        <Lock name={ device.slug } state={ device.state } dispatch={ dispatch } />
-        {this._renderHistoryButton()}
-      </View>
-    );
-  }
   _renderNotSupported() {
     return <NotSupported />;
   }
@@ -80,7 +45,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingTop: STATUSBAR_HEIGHT
   }
 });
 
